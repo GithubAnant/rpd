@@ -1,12 +1,15 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { signIn, signOut } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 export function SignInButton() {
-    const handleSignIn = useCallback(() => {
-        signIn('google', { callbackUrl: '/home' });
+    const handleSignIn = useCallback(async () => {
+        await signIn.social({
+            provider: 'google',
+            callbackURL: '/home',
+        });
     }, []);
 
     return (
@@ -33,7 +36,7 @@ export function GuestButton() {
     return (
         <button
             onClick={handleGuest}
-            className="flex items-center justify-center w-full py-3 bg-transparent border border-[#536471] hover:bg-[#1d9bf0]/10 text-[#1d9bf0] font-bold rounded-full transition-colors text-[15px]"
+            className="flex items-center justify-center w-full py-3 bg-transparent border border-[#536471] hover:bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold rounded-full transition-colors text-[15px]"
         >
             Continue as guest
         </button>
@@ -47,9 +50,14 @@ export function SignOutButton() {
         if (typeof window !== 'undefined') {
             localStorage.removeItem('guestMode');
         }
-        const { signOut } = await import('next-auth/react');
-        await signOut({ callbackUrl: '/' });
-    }, []);
+        await signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    router.push('/');
+                },
+            },
+        });
+    }, [router]);
 
     return (
         <button

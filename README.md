@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RPD - Research Paper Doomscroller
+
+An addictive, X/Twitter-style feed for browsing arXiv research papers. Discover AI, ML, NLP, and Computer Vision papers with a familiar infinite scroll experience.
+
+## Features
+
+- **X/Twitter-style UI** - Flat design, dark theme, familiar navigation
+- **Infinite scroll feed** - Smooth, endless paper browsing
+- **Category tabs** - For You, ML, NLP, Vision, Robotics
+- **Bookmarks** - Save papers for later reading
+- **Individual paper pages** - Deep links for sharing (`/paper/[id]`)
+- **Google auth + guest mode** - Optional sign-in
+- **Mobile-first** - Optimized for mobile Chrome
+
+## Tech Stack
+
+- **Next.js 16** with App Router
+- **TypeScript**
+- **Tailwind CSS**
+- **NextAuth.js** for authentication
+- **arXiv API** for paper data
+- **Vercel Analytics**
+
+## Routes
+
+| Route         | Description            |
+| ------------- | ---------------------- |
+| `/`           | Landing page with auth |
+| `/home`       | Main paper feed        |
+| `/paper/[id]` | Individual paper view  |
+| `/saved`      | Bookmarked papers      |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your Google OAuth credentials and NEXTAUTH_SECRET
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+```
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
+Deploy on [Vercel](https://vercel.com) with one click. Analytics are automatically enabled.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
