@@ -1,29 +1,21 @@
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { headers } from 'next/headers';
-import { SignInButton, GuestButton } from '@/components/AuthButtons';
-import { auth } from '@/lib/auth';
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { SignInButton, GuestButton } from "@/features/auth";
+import { ArxivLogo } from "@/components/ui/arxiv-logo";
+import { getSession } from "@/lib/auth-utils";
 
 export default async function LandingPage() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await getSession();
 
   if (session?.user) {
-    redirect('/home');
+    redirect("/home");
   }
 
   return (
     <main className="min-h-screen bg-black flex">
       {/* Left side - branding */}
-      <div className="hidden lg:flex flex-1 items-center justify-center bg-black">
-        <svg className="w-80 h-80" viewBox="0 0 100 100" fill="none">
-          {/* arXiv X logo - solid stroke */}
-          <line x1="75" y1="15" x2="25" y2="85" stroke="#e7e9ea" strokeWidth="14" strokeLinecap="round" />
-          {/* arXiv X logo - outlined stroke */}
-          <line x1="25" y1="15" x2="75" y2="85" stroke="#e7e9ea" strokeWidth="14" strokeLinecap="round" />
-          <line x1="25" y1="15" x2="75" y2="85" stroke="black" strokeWidth="8" strokeLinecap="round" />
-        </svg>
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-black text-[#e7e9ea]">
+        <ArxivLogo size="xl" />
       </div>
 
       {/* Right side - auth */}
