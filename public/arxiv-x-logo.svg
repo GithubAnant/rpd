@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Solid stroke (back-right to front-left) -->
+  <line x1="75" y1="15" x2="25" y2="85" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+  <!-- Outlined stroke (back-left to front-right) - white fill with black outline -->
+  <line x1="25" y1="15" x2="75" y2="85" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+  <line x1="25" y1="15" x2="75" y2="85" stroke="white" stroke-width="8" stroke-linecap="round"/>
+</svg>

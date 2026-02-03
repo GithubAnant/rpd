@@ -1,10 +1,13 @@
 import Link from 'next/link';
-import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 import { SignInButton, GuestButton } from '@/components/AuthButtons';
+import { auth } from '@/lib/auth';
 
 export default async function LandingPage() {
-  const session = await getServerSession();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
   if (session?.user) {
     redirect('/home');
@@ -14,8 +17,12 @@ export default async function LandingPage() {
     <main className="min-h-screen bg-black flex">
       {/* Left side - branding */}
       <div className="hidden lg:flex flex-1 items-center justify-center bg-black">
-        <svg className="w-80 h-80 text-[#e7e9ea]" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19.5 3h-15A1.5 1.5 0 003 4.5v15A1.5 1.5 0 004.5 21h15a1.5 1.5 0 001.5-1.5v-15A1.5 1.5 0 0019.5 3zM12 17.5a5.5 5.5 0 110-11 5.5 5.5 0 010 11z" />
+        <svg className="w-80 h-80" viewBox="0 0 100 100" fill="none">
+          {/* arXiv X logo - solid stroke */}
+          <line x1="75" y1="15" x2="25" y2="85" stroke="#e7e9ea" strokeWidth="14" strokeLinecap="round" />
+          {/* arXiv X logo - outlined stroke */}
+          <line x1="25" y1="15" x2="75" y2="85" stroke="#e7e9ea" strokeWidth="14" strokeLinecap="round" />
+          <line x1="25" y1="15" x2="75" y2="85" stroke="black" strokeWidth="8" strokeLinecap="round" />
         </svg>
       </div>
 
@@ -23,8 +30,10 @@ export default async function LandingPage() {
       <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 max-w-[600px]">
         {/* Mobile logo */}
         <div className="lg:hidden mb-8">
-          <svg className="w-12 h-12 text-[#e7e9ea]" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19.5 3h-15A1.5 1.5 0 003 4.5v15A1.5 1.5 0 004.5 21h15a1.5 1.5 0 001.5-1.5v-15A1.5 1.5 0 0019.5 3zM12 17.5a5.5 5.5 0 110-11 5.5 5.5 0 010 11z" />
+          <svg className="w-12 h-12" viewBox="0 0 100 100" fill="none">
+            <line x1="75" y1="15" x2="25" y2="85" stroke="#e7e9ea" strokeWidth="14" strokeLinecap="round" />
+            <line x1="25" y1="15" x2="75" y2="85" stroke="#e7e9ea" strokeWidth="14" strokeLinecap="round" />
+            <line x1="25" y1="15" x2="75" y2="85" stroke="black" strokeWidth="8" strokeLinecap="round" />
           </svg>
         </div>
 
