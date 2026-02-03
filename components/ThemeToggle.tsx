@@ -2,37 +2,41 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-// 20 curated color themes - avoiding red/orange/aggressive colors
+// 20 curated color themes - maximally distinct colors
 const THEMES = [
-    // Blues & Cyans
-    { id: 'twitter-blue', name: 'Twitter Blue', accent: '#1d9bf0', bg: '#000000' },
-    { id: 'sky', name: 'Sky', accent: '#0ea5e9', bg: '#000000' },
-    { id: 'cyan', name: 'Cyan', accent: '#06b6d4', bg: '#000000' },
+    // Core Blues
+    { id: "twitter-blue", name: "Twitter Blue", accent: "#1d9bf0", bg: "#000000" },
+    { id: "cyan", name: "Cyan", accent: "#06b6d4", bg: "#000000" },
 
-    // Greens & Teals
-    { id: 'emerald', name: 'Emerald', accent: '#10b981', bg: '#000000' },
-    { id: 'teal', name: 'Teal', accent: '#14b8a6', bg: '#000000' },
-    { id: 'green', name: 'Green', accent: '#22c55e', bg: '#000000' },
+    // Greens
+    { id: "emerald", name: "Emerald", accent: "#10b981", bg: "#000000" },
+    { id: "lime", name: "Lime", accent: "#84cc16", bg: "#000000" },
 
-    // Purples & Violets
-    { id: 'violet', name: 'Violet', accent: '#8b5cf6', bg: '#000000' },
-    { id: 'purple', name: 'Purple', accent: '#a855f7', bg: '#000000' },
-    { id: 'indigo', name: 'Indigo', accent: '#6366f1', bg: '#000000' },
-    { id: 'fuchsia', name: 'Fuchsia', accent: '#d946ef', bg: '#000000' },
+    // Purples
+    { id: "violet", name: "Violet", accent: "#8b5cf6", bg: "#000000" },
+    { id: "magenta", name: "Magenta", accent: "#e879f9", bg: "#000000" },
 
-    // Pinks & Roses
-    { id: 'pink', name: 'Pink', accent: '#ec4899', bg: '#000000' },
-    { id: 'rose', name: 'Rose', accent: '#f43f5e', bg: '#000000' },
+    // Pinks & Warm
+    { id: "pink", name: "Pink", accent: "#ec4899", bg: "#000000" },
+    { id: "coral", name: "Coral", accent: "#fb7185", bg: "#000000" },
 
-    // Different backgrounds
-    { id: 'midnight', name: 'Midnight', accent: '#818cf8', bg: '#0f0f23' },
-    { id: 'ocean', name: 'Ocean', accent: '#22d3ee', bg: '#0c1222' },
-    { id: 'forest', name: 'Forest', accent: '#4ade80', bg: '#0a1410' },
-    { id: 'grape', name: 'Grape', accent: '#c084fc', bg: '#1a0a20' },
-    { id: 'slate', name: 'Slate', accent: '#94a3b8', bg: '#0f172a' },
-    { id: 'zinc', name: 'Zinc', accent: '#a1a1aa', bg: '#18181b' },
-    { id: 'warm', name: 'Warm', accent: '#fbbf24', bg: '#1c1917' },
-    { id: 'cool', name: 'Cool', accent: '#67e8f9', bg: '#111827' },
+    // Oranges & Yellows
+    { id: "amber", name: "Amber", accent: "#f59e0b", bg: "#000000" },
+    { id: "gold", name: "Gold", accent: "#eab308", bg: "#000000" },
+
+    // Neutrals
+    { id: "silver", name: "Silver", accent: "#94a3b8", bg: "#000000" },
+    { id: "white", name: "White", accent: "#e2e8f0", bg: "#000000" },
+
+    // Special backgrounds
+    { id: "midnight", name: "Midnight", accent: "#818cf8", bg: "#0f0f23" },
+    { id: "ocean", name: "Ocean", accent: "#22d3ee", bg: "#0c1222" },
+    { id: "forest", name: "Forest", accent: "#4ade80", bg: "#0a1410" },
+    { id: "grape", name: "Grape", accent: "#c084fc", bg: "#1a0a20" },
+    { id: "sunset", name: "Sunset", accent: "#fb923c", bg: "#1c1210" },
+    { id: "mint", name: "Mint", accent: "#2dd4bf", bg: "#0a1412" },
+    { id: "berry", name: "Berry", accent: "#f472b6", bg: "#1a0a14" },
+    { id: "electric", name: "Electric", accent: "#38bdf8", bg: "#0c1525" },
 ] as const;
 
 type ThemeId = typeof THEMES[number]['id'];
