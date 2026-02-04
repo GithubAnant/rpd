@@ -27,9 +27,8 @@ function formatDate(dateStr: string): string {
 
 function formatAuthors(authors: string[]): string {
     if (authors.length === 0) return '';
-    if (authors.length === 1) return authors[0];
-    if (authors.length === 2) return authors.join(' and ');
-    return `${authors[0]} et al.`;
+    if (authors.length <= 3) return authors.join(', ');
+    return `${authors.slice(0, 3).join(', ')} et al.`;
 }
 
 export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave }: PaperCardProps) {
@@ -61,13 +60,6 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
     return (
         <article className="border-b border-[#2f3336] hover:bg-neutral-900/30 transition-colors">
             <Link href={`/paper/${paper.id}`} className="block px-4 py-4">
-                {/* Visual Cover (New Sick UI) */}
-                <PaperCardVisual
-                    thumbnail={paper.thumbnail}
-                    category={paper.primaryCategory}
-                    title={paper.title}
-                />
-
                 {/* Header row */}
                 <div className="flex items-start gap-3">
                     {/* Category avatar */}
@@ -94,6 +86,15 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
                         <h2 className={`mt-1 text-[15px] text-[#e7e9ea] leading-snug ${isExpanded ? '' : 'line-clamp-2'}`}>
                             {paper.title}
                         </h2>
+
+                        {/* Visual Cover */}
+                        <div className="mt-3">
+                            <PaperCardVisual
+                                thumbnail={paper.thumbnail}
+                                category={paper.primaryCategory}
+                                title={paper.title}
+                            />
+                        </div>
 
                         {/* Abstract */}
                         <p
