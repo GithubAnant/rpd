@@ -1,13 +1,11 @@
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
 
 /**
  * Context for tRPC procedures
  */
 export type Context = {
-  auth?: typeof auth.$Infer.Session;
+  // auth removed
 };
 
 /**
@@ -36,26 +34,11 @@ export const createCallerFactory = t.createCallerFactory;
 export const publicProcedure = t.procedure;
 
 /**
- * Protected procedure - requires authenticated session
- * Verifies authentication server-side using better-auth
+ * Protected procedure - formerly required authenticated session
+ * Now aliased to publicProcedure as auth is removed.
+ * TODO: Rename or remove if strictly not needed.
  */
-export const protectedProcedure = publicProcedure.use(async ({ ctx, next }) => {
-  const session = await auth.api.getSession({ headers: await headers() });
-
-  if (!session) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: "You must be logged in to perform this action",
-    });
-  }
-
-  return next({
-    ctx: {
-      ...ctx,
-      auth: session,
-    },
-  });
-});
+export const protectedProcedure = publicProcedure;
 
 /**
  * Premium procedure - placeholder for future premium features

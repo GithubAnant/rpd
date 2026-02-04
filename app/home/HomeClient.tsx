@@ -17,7 +17,7 @@ interface HomeClientProps {
 }
 
 const TABS = [
-    { id: "for-you", label: "For you", category: "cs.AI" },
+    { id: "for-you", label: "For you", category: "trending" },
     { id: "ml", label: "ML", category: "cs.LG" },
     { id: "nlp", label: "NLP", category: "cs.CL" },
     { id: "cv", label: "Vision", category: "cs.CV" },
@@ -30,7 +30,7 @@ export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
     const { savedIds } = useSavedPapers();
 
     const activeCategory =
-        TABS.find((t) => t.id === activeTab)?.category || "cs.AI";
+        TABS.find((t) => t.id === activeTab)?.category || "trending";
 
     const handleTabChange = useCallback((tabId: string) => {
         setActiveTab(tabId);
@@ -39,16 +39,13 @@ export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
 
     return (
         <div className="min-h-screen bg-black flex">
-            <Sidebar savedCount={savedIds.size} isGuest={isGuest} />
+            <Sidebar savedCount={savedIds.size} />
 
             {/* Main content */}
             <main className="flex-1 min-w-0 border-r border-[#2f3336] max-w-[600px]">
                 {/* Header */}
                 <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-[#2f3336]">
                     <MobileHeader
-                        userName={userName}
-                        userImage={userImage}
-                        isGuest={isGuest}
                         savedCount={savedIds.size}
                     />
 
@@ -82,8 +79,6 @@ export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
             </aside>
 
             <MobileBottomNav
-                userImage={userImage}
-                isGuest={isGuest}
                 savedCount={savedIds.size}
             />
         </div>

@@ -9,6 +9,7 @@ export interface Paper {
   primaryCategory: string;
   pdfUrl: string;
   arxivUrl: string;
+  thumbnail?: string;
 }
 
 export interface PapersResponse {

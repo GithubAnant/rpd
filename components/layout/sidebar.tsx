@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArxivLogo } from "@/components/ui/arxiv-logo";
 import { NavItem } from "@/components/ui/nav-item";
 import { HomeIcon, BookmarkIcon } from "@/components/ui/icons";
-import { SignOutButton } from "@/features/auth";
+
 
 interface SidebarProps {
     savedCount: number;
@@ -14,7 +14,7 @@ interface SidebarProps {
 /**
  * Desktop sidebar with logo, navigation, and sign out
  */
-export function Sidebar({ savedCount, isGuest }: SidebarProps) {
+export function Sidebar({ savedCount }: Omit<SidebarProps, "isGuest">) {
     return (
         <aside className="hidden lg:flex flex-col w-[275px] px-3 border-r border-[#2f3336]">
             {/* Logo */}
@@ -38,8 +38,6 @@ export function Sidebar({ savedCount, isGuest }: SidebarProps) {
                     label="Bookmarks"
                     count={savedCount}
                 />
-                {/* Only show sign out for authenticated users, not guests */}
-                {!isGuest && <SignOutButton />}
             </nav>
         </aside>
     );

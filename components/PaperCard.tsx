@@ -3,6 +3,7 @@
 import { memo, useState, useCallback, useRef, TouchEvent } from 'react';
 import Link from 'next/link';
 import { Paper } from '@/types/paper';
+import { PaperCardVisual } from './paper-card-visual';
 
 interface PaperCardProps {
     paper: Paper;
@@ -58,12 +59,19 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
     }, [isExpanded]);
 
     return (
-        <article className="border-b border-[#2f3336] hover-bg transition-colors">
-            <Link href={`/paper/${paper.id}`} className="block px-4 py-3">
+        <article className="border-b border-[#2f3336] hover:bg-neutral-900/30 transition-colors">
+            <Link href={`/paper/${paper.id}`} className="block px-4 py-4">
+                {/* Visual Cover (New Sick UI) */}
+                <PaperCardVisual
+                    thumbnail={paper.thumbnail}
+                    category={paper.primaryCategory}
+                    title={paper.title}
+                />
+
                 {/* Header row */}
                 <div className="flex items-start gap-3">
                     {/* Category avatar */}
-                    <div className="w-10 h-10 rounded-full bg-[#16181c] flex items-center justify-center flex-shrink-0 text-[var(--color-accent)] font-bold text-sm">
+                    <div className="w-10 h-10 rounded-full bg-[#16181c] flex items-center justify-center shrink-0 text-(--color-accent) font-bold text-sm">
                         {paper.primaryCategory.split('.')[1]?.toUpperCase().slice(0, 2) || 'AI'}
                     </div>
 
@@ -98,7 +106,7 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
                         {!isExpanded && paper.abstract.length > 200 && (
                             <button
                                 onClick={handleExpand}
-                                className="text-[var(--color-accent)] text-[15px] mt-1 hover:underline"
+                                className="text-(--color-accent) text-[15px] mt-1 hover:underline"
                             >
                                 Show more
                             </button>
@@ -107,8 +115,8 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
                         {/* Action buttons */}
                         <div className="flex items-center justify-between mt-3 max-w-[425px]">
                             {/* Reply/comments placeholder */}
-                            <button className="flex items-center gap-2 text-[#71767b] hover:text-[var(--color-accent)] transition-colors group">
-                                <div className="p-2 rounded-full group-hover:bg-[var(--color-accent)]/10">
+                            <button className="flex items-center gap-2 text-[#71767b] hover:text-(--color-accent) transition-colors group">
+                                <div className="p-2 rounded-full group-hover:bg-(--color-accent)/10">
                                     <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                     </svg>
@@ -118,9 +126,9 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
                             {/* Share */}
                             <button
                                 onClick={handleShare}
-                                className="flex items-center gap-2 text-[#71767b] hover:text-[var(--color-accent)] transition-colors group"
+                                className="flex items-center gap-2 text-[#71767b] hover:text-(--color-accent) transition-colors group"
                             >
-                                <div className="p-2 rounded-full group-hover:bg-[var(--color-accent)]/10">
+                                <div className="p-2 rounded-full group-hover:bg-(--color-accent)/10">
                                     <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                                     </svg>
@@ -130,9 +138,9 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
                             {/* Bookmark/Save */}
                             <button
                                 onClick={handleSave}
-                                className={`flex items-center gap-2 transition-colors group ${isSaved ? 'text-[var(--color-accent)]' : 'text-[#71767b] hover:text-[var(--color-accent)]'}`}
+                                className={`flex items-center gap-2 transition-colors group ${isSaved ? 'text-(--color-accent)' : 'text-[#71767b] hover:text-(--color-accent)'}`}
                             >
-                                <div className={`p-2 rounded-full ${isSaved ? 'bg-[var(--color-accent)]/10' : 'group-hover:bg-[var(--color-accent)]/10'}`}>
+                                <div className={`p-2 rounded-full ${isSaved ? 'bg-(--color-accent)/10' : 'group-hover:bg-(--color-accent)/10'}`}>
                                     <svg className="w-[18px] h-[18px]" fill={isSaved ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                                     </svg>

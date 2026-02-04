@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { HomeIcon, BookmarkIcon, UserIcon } from "@/components/ui/icons";
+import { HomeIcon, BookmarkIcon } from "@/components/ui/icons";
 
 interface MobileBottomNavProps {
     userImage?: string | null;
@@ -13,10 +13,8 @@ interface MobileBottomNavProps {
  * Mobile bottom navigation bar
  */
 export function MobileBottomNav({
-    userImage,
-    isGuest,
     savedCount,
-}: MobileBottomNavProps) {
+}: Omit<MobileBottomNavProps, "userImage" | "isGuest">) {
     return (
         <nav className="fixed bottom-0 left-0 right-0 bg-black border-t border-[#2f3336] flex items-center justify-around py-2 lg:hidden safe-bottom">
             <Link href="/home" className="p-3">
@@ -30,19 +28,6 @@ export function MobileBottomNav({
                     </span>
                 )}
             </Link>
-            {isGuest ? (
-                <Link href="/" className="p-3">
-                    <UserIcon className="text-[#e7e9ea]" />
-                </Link>
-            ) : (
-                <Link href="/" className="p-3">
-                    <img
-                        src={userImage || ""}
-                        alt=""
-                        className="w-7 h-7 rounded-full"
-                    />
-                </Link>
-            )}
         </nav>
     );
 }
