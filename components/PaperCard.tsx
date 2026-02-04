@@ -77,10 +77,7 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
                             <span className="text-[#71767b]">{formatDate(paper.publishedDate)}</span>
                         </div>
 
-                        {/* Category tag */}
-                        <span className="text-[13px] text-[#71767b]">
-                            {paper.primaryCategory}
-                        </span>
+
 
                         {/* Title */}
                         <h2 className={`mt-1 text-[15px] text-[#e7e9ea] leading-snug ${isExpanded ? '' : 'line-clamp-2'}`}>
