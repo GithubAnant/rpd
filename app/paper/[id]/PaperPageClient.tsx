@@ -48,7 +48,7 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
                 <div className="px-4 py-3">
                     {/* Author info */}
                     <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[#16181c] flex items-center justify-center flex-shrink-0 text-[#1d9bf0] font-bold text-sm">
+                        <div className="w-10 h-10 rounded-full bg-[#16181c] flex items-center justify-center shrink-0 text-[#1d9bf0] font-bold text-sm">
                             {paper.primaryCategory.split(".")[1]?.toUpperCase().slice(0, 2) ||
                                 "AI"}
                         </div>
