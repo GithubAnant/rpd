@@ -1,9 +1,10 @@
 'use client';
 
-import { memo, useState, useCallback, useRef, TouchEvent } from 'react';
+import { memo, useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Paper } from '@/types/paper';
 import { PaperCardVisual } from './paper-card-visual';
+import { ShareMenu } from './ShareMenu';
 
 interface PaperCardProps {
     paper: Paper;
@@ -33,6 +34,8 @@ function formatAuthors(authors: string[]): string {
 
 export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave }: PaperCardProps) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
+    const shareButtonRef = useRef<HTMLButtonElement>(null!);
 
     const handleSave = useCallback((e: React.MouseEvent) => {
         e.preventDefault();
@@ -43,13 +46,8 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
     const handleShare = useCallback((e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        const url = `${window.location.origin}/paper/${paper.id}`;
-        if (navigator.share) {
-            navigator.share({ title: paper.title, url });
-        } else {
-            navigator.clipboard.writeText(url);
-        }
-    }, [paper.id, paper.title]);
+        setIsShareMenuOpen(!isShareMenuOpen);
+    }, [isShareMenuOpen]);
 
     const handleExpand = useCallback((e: React.MouseEvent) => {
         e.preventDefault();
@@ -70,11 +68,11 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
                     <div className="flex-1 min-w-0">
                         {/* Author line */}
                         <div className="flex items-center gap-1 text-[15px]">
-                            <span className="font-bold text-[#e7e9ea] truncate">
+                            <span className="font-bold text-[#e7e9ea] truncate max-w-[60%]">
                                 {formatAuthors(paper.authors)}
                             </span>
-                            <span className="text-[#71767b]">·</span>
-                            <span className="text-[#71767b]">{formatDate(paper.publishedDate)}</span>
+                            <span className="text-[#71767b] shrink-0">·</span>
+                            <span className="text-[#71767b] shrink-0 whitespace-nowrap">{formatDate(paper.publishedDate)}</span>
                         </div>
 
 
@@ -111,55 +109,55 @@ export const PaperCard = memo(function PaperCard({ paper, isSaved, onToggleSave 
                         )}
 
                         {/* Action buttons */}
-                        <div className="flex items-center justify-between mt-3 max-w-[425px]">
-                            {/* Reply/comments placeholder */}
-                            <button className="flex items-center gap-2 text-[#71767b] hover:text-(--color-accent) transition-colors group">
-                                <div className="p-2 rounded-full group-hover:bg-(--color-accent)/10">
-                                    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                    </svg>
-                                </div>
-                            </button>
-
+                        <div className="flex items-center justify-between mt-3 max-w-106.25 relative">
                             {/* Share */}
                             <button
+                                ref={shareButtonRef}
                                 onClick={handleShare}
                                 className="flex items-center gap-2 text-[#71767b] hover:text-(--color-accent) transition-colors group"
                             >
-                                <div className="p-2 rounded-full group-hover:bg-(--color-accent)/10">
-                                    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div className="p-2 rounded-full group-hover:bg-accent/10">
+                                    <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                                     </svg>
                                 </div>
                             </button>
+
+                            <ShareMenu
+                                paper={paper}
+                                isOpen={isShareMenuOpen}
+                                onClose={() => setIsShareMenuOpen(false)}
+                                buttonRef={shareButtonRef}
+                            />
 
                             {/* Bookmark/Save */}
                             <button
                                 onClick={handleSave}
                                 className={`flex items-center gap-2 transition-colors group ${isSaved ? 'text-(--color-accent)' : 'text-[#71767b] hover:text-(--color-accent)'}`}
                             >
-                                <div className={`p-2 rounded-full ${isSaved ? 'bg-(--color-accent)/10' : 'group-hover:bg-(--color-accent)/10'}`}>
-                                    <svg className="w-[18px] h-[18px]" fill={isSaved ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
+                                <div className={`p-2 rounded-full ${isSaved ? 'bg-accent/10' : 'group-hover:bg-accent/10'}`}>
+                                    <svg className="w-4.5 h-4.5" fill={isSaved ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                                     </svg>
                                 </div>
                             </button>
 
                             {/* PDF link */}
-                            <a
-                                href={paper.pdfUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    window.open(paper.pdfUrl, '_blank', 'noopener,noreferrer');
+                                }}
                                 className="flex items-center gap-2 text-[#71767b] hover:text-[#00ba7c] transition-colors group"
                             >
                                 <div className="p-2 rounded-full group-hover:bg-[#00ba7c]/10">
-                                    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
                                 </div>
                                 <span className="text-[13px]">PDF</span>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

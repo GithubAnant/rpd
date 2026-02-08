@@ -38,7 +38,7 @@ export function PageHeader({
 }: PageHeaderProps) {
     return (
         <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-[#2f3336]">
-            <div className="flex items-center gap-8 px-4 py-2 max-w-[600px] mx-auto">
+            <div className="flex items-center gap-8 px-4 py-2 max-w-150 mx-auto">
                 <Link
                     href={backHref}
                     className="p-2 -ml-2 rounded-full hover-bg transition-colors"

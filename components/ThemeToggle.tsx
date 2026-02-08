@@ -43,18 +43,13 @@ type ThemeId = typeof THEMES[number]['id'];
 
 export function ThemeToggle() {
     const [isOpen, setIsOpen] = useState(false);
-    const [currentTheme, setCurrentTheme] = useState<ThemeId>('twitter-blue');
-    const [mounted, setMounted] = useState(false);
-
-    // Load saved theme on mount
-    useEffect(() => {
-        setMounted(true);
+    
+    // Initialize theme from localStorage
+    const [currentTheme, setCurrentTheme] = useState<ThemeId>(() => {
+        if (typeof window === 'undefined') return 'twitter-blue';
         const saved = localStorage.getItem('theme');
-        if (saved && THEMES.find(t => t.id === saved)) {
-            setCurrentTheme(saved as ThemeId);
-            applyTheme(saved as ThemeId);
-        }
-    }, []);
+        return (saved && THEMES.find(t => t.id === saved)) ? saved as ThemeId : 'twitter-blue';
+    });
 
     const applyTheme = useCallback((themeId: ThemeId) => {
         const theme = THEMES.find(t => t.id === themeId);
@@ -70,26 +65,29 @@ export function ThemeToggle() {
         root.style.setProperty('--color-bg-secondary', secondaryBg);
     }, []);
 
+    // Apply theme on mount and when it changes
+    useEffect(() => {
+        applyTheme(currentTheme);
+    }, [applyTheme, currentTheme]);
+
     const handleThemeChange = useCallback((themeId: ThemeId) => {
         setCurrentTheme(themeId);
         localStorage.setItem('theme', themeId);
         applyTheme(themeId);
     }, [applyTheme]);
 
-    if (!mounted) return null;
-
     return (
         <div className="fixed bottom-6 right-6 z-50">
             {/* Theme picker popup */}
             {isOpen && (
-                <div className="absolute bottom-14 right-0 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-2xl p-4 shadow-2xl w-72 max-h-[70vh] overflow-y-auto">
-                    <h3 className="text-[var(--color-text-primary)] font-bold text-sm mb-3">Choose Theme</h3>
+                <div className="absolute bottom-14 right-0 bg-(--color-bg-secondary) border border-(--color-border) rounded-2xl p-4 shadow-2xl w-72 max-h-[70vh] overflow-y-auto">
+                    <h3 className="text-(--color-text-primary) font-bold text-sm mb-3">Choose Theme</h3>
                     <div className="grid grid-cols-4 gap-2">
                         {THEMES.map((theme) => (
                             <button
                                 key={theme.id}
                                 onClick={() => handleThemeChange(theme.id)}
-                                className={`group relative w-full aspect-square rounded-xl transition-all hover:scale-110 ${currentTheme === theme.id ? 'ring-2 ring-white ring-offset-2 ring-offset-[var(--color-bg-secondary)]' : ''
+                                className={`group relative w-full aspect-square rounded-xl transition-all hover:scale-110 ${currentTheme === theme.id ? 'ring-2 ring-white ring-offset-2 ring-offset-(--color-bg-secondary)' : ''
                                     }`}
                                 style={{ backgroundColor: theme.accent }}
                                 title={theme.name}
@@ -109,7 +107,7 @@ export function ThemeToggle() {
                         ))}
                     </div>
                     {/* Theme name */}
-                    <p className="text-[var(--color-text-secondary)] text-xs mt-3 text-center">
+                    <p className="text-(--color-text-secondary) text-xs mt-3 text-center">
                         {THEMES.find(t => t.id === currentTheme)?.name}
                     </p>
                 </div>

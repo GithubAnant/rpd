@@ -15,7 +15,7 @@ export function EnterButton() {
     return (
         <button
             onClick={handleEnter}
-            className="bg-white text-black hover:bg-neutral-200 transition-colors duration-200 font-bold rounded-full h-[40px] px-6 text-[15px] w-full"
+            className="bg-white text-black hover:bg-neutral-200 transition-colors duration-200 font-bold rounded-full h-10 px-6 text-[15px] w-full"
         >
             Enter
         </button>

@@ -42,7 +42,7 @@ export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
             <Sidebar savedCount={savedIds.size} />
 
             {/* Main content */}
-            <main className="flex-1 min-w-0 border-r border-[#2f3336] max-w-[600px]">
+            <main className="flex-1 min-w-0 border-r border-[#2f3336] max-w-150">
                 {/* Header */}
                 <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-[#2f3336]">
                     <MobileHeader
@@ -71,7 +71,7 @@ export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
             </main>
 
             {/* Right sidebar - hidden on mobile */}
-            <aside className="hidden xl:block w-[350px] px-6">
+            <aside className="hidden xl:block w-87.5 px-6">
                 <div className="sticky top-4 pt-3 flex flex-col gap-4">
                     <SearchBox />
                     <TrendingTopics />

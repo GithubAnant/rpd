@@ -44,7 +44,7 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
             <PageHeader title="Paper" />
 
             {/* Paper content */}
-            <article className="max-w-[600px] mx-auto border-x border-[#2f3336]">
+            <article className="max-w-150 mx-auto border-x border-[#2f3336]">
                 <div className="px-4 py-3">
                     {/* Author info */}
                     <div className="flex items-start gap-3">
@@ -94,14 +94,14 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
                     {/* Actions */}
                     <div className="flex items-center justify-around py-2 border-b border-[#2f3336]">
                         <button className="p-3 text-[#71767b] hover:text-[#1d9bf0] rounded-full hover-bg transition-colors">
-                            <CommentIcon className="w-[22px] h-[22px]" />
+                            <CommentIcon className="w-5.5 h-5.5" />
                         </button>
 
                         <button
                             onClick={handleShare}
                             className="p-3 text-[#71767b] hover:text-[#1d9bf0] rounded-full hover-bg transition-colors"
                         >
-                            <ShareIcon className="w-[22px] h-[22px]" />
+                            <ShareIcon className="w-5.5 h-5.5" />
                         </button>
 
                         <button
@@ -111,7 +111,7 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
                                 : "text-[#71767b] hover:text-[#1d9bf0]"
                                 }`}
                         >
-                            <BookmarkIcon className="w-[22px] h-[22px]" fill={saved} />
+                            <BookmarkIcon className="w-5.5 h-5.5" fill={saved} />
                         </button>
                     </div>
 

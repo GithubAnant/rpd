@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 
 interface IconProps {
     className?: string;
@@ -98,7 +97,7 @@ export function UserIcon({ className = "" }: IconProps) {
 export function ShareIcon({ className = "" }: IconProps) {
     return (
         <svg
-            className={`w-[18px] h-[18px] ${className}`}
+            className={`w-4.5 h-4.5 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -116,7 +115,7 @@ export function ShareIcon({ className = "" }: IconProps) {
 export function CommentIcon({ className = "" }: IconProps) {
     return (
         <svg
-            className={`w-[18px] h-[18px] ${className}`}
+            className={`w-4.5 h-4.5 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -134,7 +133,7 @@ export function CommentIcon({ className = "" }: IconProps) {
 export function DownloadIcon({ className = "" }: IconProps) {
     return (
         <svg
-            className={`w-[18px] h-[18px] ${className}`}
+            className={`w-4.5 h-4.5 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

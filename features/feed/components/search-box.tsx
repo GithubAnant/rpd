@@ -36,7 +36,7 @@ export function SearchBox({
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="bg-[#16181c] rounded-full px-4 py-3 flex items-center gap-3 focus-within:ring-1 focus-within:ring-[var(--color-accent)] transition-all">
+            <div className="bg-[#16181c] rounded-full px-4 py-3 flex items-center gap-3 focus-within:ring-1 focus-within:ring-(--color-accent) transition-all">
                 <SearchIcon className="text-[#71767b]" />
                 <input
                     type="text"

@@ -7,7 +7,7 @@ export const SkeletonCard = memo(function SkeletonCard() {
         <div className="border-b border-[#2f3336] px-4 py-3">
             <div className="flex items-start gap-3">
                 {/* Avatar skeleton */}
-                <div className="w-10 h-10 rounded-full skeleton flex-shrink-0" />
+                <div className="w-10 h-10 rounded-full skeleton shrink-0" />
 
                 <div className="flex-1">
                     {/* Header skeleton */}

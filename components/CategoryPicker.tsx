@@ -16,7 +16,7 @@ export function CategoryPicker({ selected, onSelect }: CategoryPickerProps) {
                         key={cat.id}
                         onClick={() => onSelect(cat.id)}
                         className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${selected === cat.id
-                                ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-500/25'
+                                ? 'bg-linear-to-r from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-500/25'
                                 : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white'
                             }`}
                     >

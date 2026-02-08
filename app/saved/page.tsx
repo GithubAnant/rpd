@@ -47,7 +47,7 @@ export default function SavedPage() {
             <PageHeader title="Bookmarks" subtitle={`${savedIds.size} Papers`} />
 
             {/* Content */}
-            <div className="max-w-[600px] mx-auto border-x border-[#2f3336] min-h-screen">
+            <div className="max-w-150 mx-auto border-x border-[#2f3336] min-h-screen">
                 {isLoading && (
                     <>
                         <SkeletonCard />

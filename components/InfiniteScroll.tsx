@@ -88,29 +88,11 @@ export function InfiniteScroll({ initialCategory = 'cs.AI' }: InfiniteScrollProp
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Pull to refresh handler
-    const handleRefresh = useCallback(() => {
-        setPapers([]);
-        setPage(0);
-        setHasMore(true);
-        isLoadingRef.current = false;
-        fetchPapers(0);
-    }, [fetchPapers]);
-
     return (
         <div className="min-h-screen">
-            {/* Pull to refresh hint */}
-            {papers.length > 0 && (
-                <button
-                    onClick={handleRefresh}
-                    className="w-full py-3 text-center text-zinc-500 text-sm hover:text-zinc-400 transition-colors"
-                >
-                    ↻ Pull to refresh
-                </button>
-            )}
 
             {/* Papers feed */}
-            <div className="flex flex-col gap-4 px-4 pb-8">
+            <div className="flex flex-col">
                 {papers.map((paper) => (
                     <PaperCard
                         key={paper.id}
@@ -131,7 +113,7 @@ export function InfiniteScroll({ initialCategory = 'cs.AI' }: InfiniteScrollProp
 
                 {/* Error state */}
                 {error && (
-                    <div className="text-center py-8">
+                    <div className="text-center py-8 px-4">
                         <p className="text-red-400 mb-4">{error}</p>
                         <button
                             onClick={() => fetchPapers(page)}
@@ -147,14 +129,14 @@ export function InfiniteScroll({ initialCategory = 'cs.AI' }: InfiniteScrollProp
 
                 {/* End of feed */}
                 {!hasMore && papers.length > 0 && (
-                    <p className="text-center text-zinc-500 py-8 text-sm">
+                    <p className="text-center text-zinc-500 py-8 text-sm px-4">
                         You&apos;ve reached the end! 🎉
                     </p>
                 )}
 
                 {/* Empty state */}
                 {!isLoading && !error && papers.length === 0 && (
-                    <div className="text-center py-16">
+                    <div className="text-center py-16 px-4">
                         <p className="text-zinc-400 text-lg mb-2">No papers found</p>
                         <p className="text-zinc-500 text-sm">Try refreshing the page</p>
                     </div>

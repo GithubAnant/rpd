@@ -10,11 +10,11 @@ interface TrendingTopic {
 }
 
 const TRENDING_TOPICS: TrendingTopic[] = [
-    { label: "Large Language Models", searchQuery: "large language model", paperCount: "5.2K papers" },
-    { label: "Diffusion Models", searchQuery: "diffusion model", paperCount: "3.8K papers" },
-    { label: "Reinforcement Learning", searchQuery: "reinforcement learning", paperCount: "2.1K papers" },
-    { label: "Vision Transformers", searchQuery: "vision transformer ViT", paperCount: "1.9K papers" },
-    { label: "Neural Networks", searchQuery: "neural network", paperCount: "12K papers" },
+    { label: "Large Language Models", searchQuery: "large language model", paperCount: "" },
+    { label: "Diffusion Models", searchQuery: "diffusion model", paperCount: "" },
+    { label: "Reinforcement Learning", searchQuery: "reinforcement learning", paperCount: "" },
+    { label: "Vision Transformers", searchQuery: "vision transformer ViT", paperCount: "" },
+    { label: "Neural Networks", searchQuery: "neural network", paperCount: "" },
 ];
 
 interface TrendingTopicItemProps {
@@ -30,7 +30,7 @@ function TrendingTopicItem({ topic, onClick }: TrendingTopicItemProps) {
         >
             <p className="text-[13px] text-[#71767b]">Trending in Research</p>
             <p className="text-[15px] font-bold text-[#e7e9ea] mt-0.5">{topic.label}</p>
-            <p className="text-[13px] text-[#71767b] mt-0.5">{topic.paperCount}</p>
+            {topic.paperCount && <p className="text-[13px] text-[#71767b] mt-0.5">{topic.paperCount}</p>}
         </button>
     );
 }

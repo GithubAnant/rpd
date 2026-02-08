@@ -19,7 +19,7 @@ export default async function LandingPage() {
       </div>
 
       {/* Right side - auth (now content) */}
-      <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 max-w-[600px]">
+      <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 max-w-150">
         {/* Mobile logo */}
         <div className="lg:hidden mb-8">
           <svg className="w-12 h-12" viewBox="0 0 100 100" fill="none">
@@ -38,12 +38,12 @@ export default async function LandingPage() {
         </p>
 
         {/* Enter button */}
-        <div className="flex flex-col gap-4 max-w-[300px]">
+        <div className="flex flex-col gap-4 max-w-75">
           <EnterButton />
         </div>
 
         {/* Terms */}
-        <p className="text-[11px] text-[#71767b] mt-4 max-w-[300px]">
+        <p className="text-[11px] text-[#71767b] mt-4 max-w-75">
           By entering, you agree to consume pure science. No distractions.
         </p>
       </div>
