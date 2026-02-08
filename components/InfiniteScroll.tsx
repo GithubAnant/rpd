@@ -8,9 +8,10 @@ import { useSavedPapers } from '@/hooks/useSavedPapers';
 
 interface InfiniteScrollProps {
     initialCategory?: string;
+    searchQuery?: string;
 }
 
-export function InfiniteScroll({ initialCategory = 'cs.AI' }: InfiniteScrollProps) {
+export function InfiniteScroll({ initialCategory = 'cs.AI', searchQuery }: InfiniteScrollProps) {
     const [papers, setPapers] = useState<Paper[]>([]);
     const [page, setPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
@@ -31,9 +32,16 @@ export function InfiniteScroll({ initialCategory = 'cs.AI' }: InfiniteScrollProp
         setError(null);
 
         try {
-            const endpoint = category === 'trending'
-                ? '/api/trending'
-                : `/api/papers?page=${pageNum}&category=${category}`;
+            let endpoint: string;
+
+            if (searchQuery) {
+                // Search mode
+                endpoint = `/api/search?q=${encodeURIComponent(searchQuery)}&page=${pageNum}`;
+            } else if (category === 'trending') {
+                endpoint = '/api/trending';
+            } else {
+                endpoint = `/api/papers?page=${pageNum}&category=${category}`;
+            }
 
             const res = await fetch(endpoint);
 
@@ -58,7 +66,7 @@ export function InfiniteScroll({ initialCategory = 'cs.AI' }: InfiniteScrollProp
             setIsLoading(false);
             isLoadingRef.current = false;
         }
-    }, [category, hasMore]);
+    }, [category, hasMore, searchQuery]);
 
     // Intersection Observer for infinite scroll
     useEffect(() => {

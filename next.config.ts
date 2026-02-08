@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn-thumbnails.huggingface.co",
       },
+      {
+        protocol: "https",
+        hostname: "huggingface.co",
+      },
     ],
   },
 };

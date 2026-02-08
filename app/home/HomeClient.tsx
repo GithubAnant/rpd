@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { useSavedPapers } from "@/hooks/useSavedPapers";
 
 // Layout components
@@ -14,6 +15,7 @@ interface HomeClientProps {
     userName?: string | null;
     userImage?: string | null;
     isGuest: boolean;
+    searchQuery?: string;
 }
 
 const TABS = [
@@ -24,10 +26,11 @@ const TABS = [
     { id: "robotics", label: "Robotics", category: "cs.RO" },
 ] as const;
 
-export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
+export function HomeClient({ userName, userImage, isGuest, searchQuery }: HomeClientProps) {
     const [activeTab, setActiveTab] = useState<string>("for-you");
     const [refreshKey, setRefreshKey] = useState(0);
     const { savedIds } = useSavedPapers();
+    const router = useRouter();
 
     const activeCategory =
         TABS.find((t) => t.id === activeTab)?.category || "trending";
@@ -35,7 +38,18 @@ export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
     const handleTabChange = useCallback((tabId: string) => {
         setActiveTab(tabId);
         setRefreshKey((k) => k + 1);
-    }, []);
+        // Clear search when switching tabs
+        if (searchQuery) {
+            router.push("/home");
+        }
+    }, [searchQuery, router]);
+
+    const handleClearSearch = useCallback(() => {
+        router.push("/home");
+    }, [router]);
+
+    // Determine if we're in search mode
+    const isSearchMode = Boolean(searchQuery);
 
     return (
         <div className="min-h-screen bg-black flex">
@@ -51,21 +65,40 @@ export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
 
                     {/* Desktop title */}
                     <div className="hidden lg:flex items-center px-4 py-3">
-                        <h1 className="text-xl font-bold text-[#e7e9ea]">Home</h1>
+                        <h1 className="text-xl font-bold text-[#e7e9ea]">
+                            {isSearchMode ? "Search Results" : "Home"}
+                        </h1>
                     </div>
 
-                    <FeedTabs
-                        tabs={TABS}
-                        activeTab={activeTab}
-                        onTabChange={handleTabChange}
-                    />
+                    {/* Show search info or tabs */}
+                    {isSearchMode ? (
+                        <div className="px-4 py-3 flex items-center justify-between border-b border-[#2f3336]">
+                            <div className="flex items-center gap-2">
+                                <span className="text-[#71767b] text-sm">Results for:</span>
+                                <span className="text-[#e7e9ea] font-medium">&quot;{searchQuery}&quot;</span>
+                            </div>
+                            <button
+                                onClick={handleClearSearch}
+                                className="text-[#1d9bf0] text-sm hover:underline"
+                            >
+                                Clear search
+                            </button>
+                        </div>
+                    ) : (
+                        <FeedTabs
+                            tabs={TABS}
+                            activeTab={activeTab}
+                            onTabChange={handleTabChange}
+                        />
+                    )}
                 </header>
 
                 {/* Feed */}
                 <div className="feed-container">
                     <InfiniteScroll
-                        key={`${activeCategory}-${refreshKey}`}
+                        key={isSearchMode ? `search-${searchQuery}` : `${activeCategory}-${refreshKey}`}
                         initialCategory={activeCategory}
+                        searchQuery={searchQuery}
                     />
                 </div>
             </main>
@@ -84,3 +117,4 @@ export function HomeClient({ userName, userImage, isGuest }: HomeClientProps) {
         </div>
     );
 }
+

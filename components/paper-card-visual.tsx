@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 interface PaperCardVisualProps {
     thumbnail?: string;
@@ -18,6 +18,8 @@ const CATEGORY_COLORS: Record<string, [string, string]> = {
 };
 
 export function PaperCardVisual({ thumbnail, category, title }: PaperCardVisualProps) {
+    const [imageError, setImageError] = useState(false);
+
     // Deterministic gradient fallback
     const gradient = useMemo(() => {
         // defaults
@@ -37,7 +39,7 @@ export function PaperCardVisual({ thumbnail, category, title }: PaperCardVisualP
         return `linear-gradient(${angle}deg, ${start}, ${end})`;
     }, [category, title]);
 
-    if (thumbnail) {
+    if (thumbnail && !imageError) {
         return (
             <div className="relative w-full aspect-video overflow-hidden rounded-xl mb-3 border border-[#2f3336]">
                 <Image
@@ -45,6 +47,7 @@ export function PaperCardVisual({ thumbnail, category, title }: PaperCardVisualP
                     alt={title}
                     fill
                     className="object-cover transition-transform duration-500 hover:scale-105"
+                    onError={() => setImageError(true)}
                 />
             </div>
         );

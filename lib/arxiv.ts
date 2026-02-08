@@ -71,6 +71,7 @@ function parseArxivEntry(entry: Element): Paper {
     primaryCategory: getPrimaryCategory(),
     pdfUrl: `https://arxiv.org/pdf/${id}.pdf`,
     arxivUrl: `https://arxiv.org/abs/${id}`,
+    thumbnail: `https://huggingface.co/papers/${id}/thumbnail.png`,
   };
 }
 
@@ -167,6 +168,61 @@ export async function fetchPaperById(id: string): Promise<Paper | null> {
   paperCache.set(id, { data: paper, timestamp: Date.now() });
 
   return paper;
+}
+
+// Search papers by query
+export async function searchPapers(
+  query: string,
+  start: number = 0,
+  maxResults: number = 10,
+): Promise<{ papers: Paper[]; total: number }> {
+  const cacheKey = `search-${query}-${start}-${maxResults}`;
+  const cached = cache.get(cacheKey);
+
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return { papers: cached.data, total: cached.total };
+  }
+
+  // Search in title and abstract, sorted by relevance
+  const searchQuery = `all:${query}`;
+  const url = `${ARXIV_API_BASE}?search_query=${encodeURIComponent(searchQuery)}&start=${start}&max_results=${maxResults}&sortBy=relevance&sortOrder=descending`;
+
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": "ArxivDoomscroller/1.0 (Research Paper Reader)",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`arXiv API error: ${response.status}`);
+  }
+
+  const xmlText = await response.text();
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xmlText, "text/xml");
+
+  const entries = doc.getElementsByTagName("entry");
+  const papers: Paper[] = [];
+
+  for (let i = 0; i < entries.length; i++) {
+    papers.push(parseArxivEntry(entries[i] as Element));
+  }
+
+  // Get total results
+  const totalEls = doc.getElementsByTagNameNS(
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "totalResults",
+  );
+  let total = 0;
+  if (totalEls.length > 0 && totalEls[0].textContent) {
+    total = parseInt(totalEls[0].textContent, 10);
+  }
+
+  // Cache the results
+  cache.set(cacheKey, { data: papers, timestamp: Date.now(), total });
+
+  return { papers, total };
 }
 
 // Popular CS categories for variety
