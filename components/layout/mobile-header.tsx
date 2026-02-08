@@ -15,22 +15,11 @@ interface MobileHeaderProps {
  * Mobile header with profile pic, logo, and bookmarks link
  */
 export function MobileHeader({
-    userName,
-    userImage,
-    isGuest,
     savedCount,
-}: MobileHeaderProps) {
+}: Omit<MobileHeaderProps, "userName" | "userImage" | "isGuest">) {
     return (
         <div className="flex items-center justify-between px-4 py-3 lg:hidden">
-            {/* Profile pic */}
-            {userImage ? (
-                <img src={userImage} alt="" className="w-8 h-8 rounded-full" />
-            ) : (
-                <div className="w-8 h-8 rounded-full bg-[#16181c] flex items-center justify-center text-[#e7e9ea] text-sm font-bold">
-                    {isGuest ? "G" : userName?.charAt(0).toUpperCase() || "U"}
-                </div>
-            )}
-
+            {/* Logo */}
             <ArxivLogo size="md" className="text-[#e7e9ea]" />
 
             <Link href="/saved" className="relative p-2">

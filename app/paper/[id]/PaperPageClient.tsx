@@ -48,7 +48,7 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
                 <div className="px-4 py-3">
                     {/* Author info */}
                     <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[#16181c] flex items-center justify-center flex-shrink-0 text-[#1d9bf0] font-bold text-sm">
+                        <div className="w-10 h-10 rounded-full bg-[#16181c] flex items-center justify-center shrink-0 text-[#1d9bf0] font-bold text-sm">
                             {paper.primaryCategory.split(".")[1]?.toUpperCase().slice(0, 2) ||
                                 "AI"}
                         </div>
@@ -56,9 +56,7 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
                             <p className="font-bold text-[15px] text-[#e7e9ea]">
                                 {paper.authors[0]}
                             </p>
-                            <p className="text-[15px] text-[#71767b]">
-                                {paper.primaryCategory}
-                            </p>
+
                         </div>
                     </div>
 
@@ -109,8 +107,8 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
                         <button
                             onClick={() => toggleSave(paper.id)}
                             className={`p-3 rounded-full hover-bg transition-colors ${saved
-                                    ? "text-[#1d9bf0]"
-                                    : "text-[#71767b] hover:text-[#1d9bf0]"
+                                ? "text-[#1d9bf0]"
+                                : "text-[#71767b] hover:text-[#1d9bf0]"
                                 }`}
                         >
                             <BookmarkIcon className="w-[22px] h-[22px]" fill={saved} />
@@ -131,22 +129,7 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
                         </div>
                     </div>
 
-                    {/* Categories */}
-                    <div className="py-4 border-t border-[#2f3336]">
-                        <h3 className="text-[15px] font-bold text-[#e7e9ea] mb-3">
-                            Categories
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                            {paper.categories.map((cat) => (
-                                <span
-                                    key={cat}
-                                    className="px-3 py-1 text-[13px] bg-transparent border border-[#536471] text-[#71767b] rounded-full"
-                                >
-                                    {cat}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
+
 
                     {/* External links */}
                     <div className="py-4 border-t border-[#2f3336] space-y-3">

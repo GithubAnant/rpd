@@ -1,13 +1,13 @@
-import Link from "next/link";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { SignInButton, GuestButton } from "@/features/auth";
 import { ArxivLogo } from "@/components/ui/arxiv-logo";
-import { getSession } from "@/lib/auth-utils";
+import { EnterButton } from "@/components/enter-button";
 
 export default async function LandingPage() {
-  const session = await getSession();
+  const cookieStore = await cookies();
+  const hasVisited = cookieStore.get("visited");
 
-  if (session?.user) {
+  if (hasVisited) {
     redirect("/home");
   }
 
@@ -18,7 +18,7 @@ export default async function LandingPage() {
         <ArxivLogo size="xl" />
       </div>
 
-      {/* Right side - auth */}
+      {/* Right side - auth (now content) */}
       <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 max-w-[600px]">
         {/* Mobile logo */}
         <div className="lg:hidden mb-8">
@@ -37,30 +37,14 @@ export default async function LandingPage() {
           Join today.
         </p>
 
-        {/* Auth buttons */}
+        {/* Enter button */}
         <div className="flex flex-col gap-4 max-w-[300px]">
-          <SignInButton />
-
-          <div className="flex items-center gap-2">
-            <div className="flex-1 h-px bg-[#2f3336]" />
-            <span className="text-[#71767b] text-sm">or</span>
-            <div className="flex-1 h-px bg-[#2f3336]" />
-          </div>
-
-          <GuestButton />
+          <EnterButton />
         </div>
 
         {/* Terms */}
         <p className="text-[11px] text-[#71767b] mt-4 max-w-[300px]">
-          By signing up, you agree to the Terms of Service and Privacy Policy.
-        </p>
-
-        {/* Sign in link */}
-        <p className="text-[17px] text-[#e7e9ea] mt-16">
-          Already have an account?{' '}
-          <Link href="/api/auth/signin" className="text-[#1d9bf0] hover:underline">
-            Sign in
-          </Link>
+          By entering, you agree to consume pure science. No distractions.
         </p>
       </div>
     </main>

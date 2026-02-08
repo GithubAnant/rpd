@@ -31,7 +31,11 @@ export function InfiniteScroll({ initialCategory = 'cs.AI' }: InfiniteScrollProp
         setError(null);
 
         try {
-            const res = await fetch(`/api/papers?page=${pageNum}&category=${category}`);
+            const endpoint = category === 'trending'
+                ? '/api/trending'
+                : `/api/papers?page=${pageNum}&category=${category}`;
+
+            const res = await fetch(endpoint);
 
             if (!res.ok) {
                 throw new Error('Failed to fetch papers');
