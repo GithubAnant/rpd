@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useState, useCallback, useRef } from 'react';
+import { memo, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Paper } from '@/types/paper';
 import { PaperCardVisual } from './paper-card-visual';

@@ -6,7 +6,6 @@ import { useSavedPapers } from "@/hooks/useSavedPapers";
 import { useLikedPapers } from "@/hooks/useLikedPapers";
 import { PageHeader } from "@/components/ui/page-header";
 import {
-  CommentIcon,
   ShareIcon,
   BookmarkIcon,
   DownloadIcon,
