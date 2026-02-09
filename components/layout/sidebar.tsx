@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArxivLogo } from "@/components/ui/arxiv-logo";
 import { NavItem } from "@/components/ui/nav-item";
 import { HomeIcon, BookmarkIcon } from "@/components/ui/icons";
+import { InstallButton } from "@/components/install-button";
 
 
 interface SidebarProps {
@@ -45,6 +46,7 @@ export function Sidebar({ savedCount }: Omit<SidebarProps, "isGuest">) {
                     label="Bookmarks"
                     count={mounted ? savedCount : 0}
                 />
+                <InstallButton variant="sidebar" />
             </nav>
         </aside>
     );

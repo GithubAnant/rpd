@@ -6,7 +6,7 @@ interface ArxivLogoProps {
 }
 
 /**
- * Arxiv X Logo - The app's main logo
+ * Xapers Logo - The app's main logo
  */
 export function ArxivLogo({ className = "", size = "md" }: ArxivLogoProps) {
     let dim = 32;
@@ -22,7 +22,7 @@ export function ArxivLogo({ className = "", size = "md" }: ArxivLogoProps) {
     return (
         <Image
             src="/icon-512.png"
-            alt="Arxiv Logo"
+            alt="Xapers Logo"
             width={dim}
             height={dim}
             className={className}

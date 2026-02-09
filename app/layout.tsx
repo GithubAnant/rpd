@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Arxiv Doomscroller",
+  title: "Xapers | Doomscroll Papers",
   description:
     "Discover the latest research papers in AI, ML, and Computer Science. Your addictive feed for cutting-edge science.",
   keywords: [
@@ -44,22 +44,22 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Arxiv Doomscroller",
+    title: "Xapers | Doomscroll Papers",
     description: "Your addictive feed for cutting-edge research. Built by Anant Singhal - dev + builder from New Delhi.",
     type: "website",
-    siteName: "Arxiv Doomscroller",
+    siteName: "Xapers",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Arxiv Doomscroller",
+        alt: "Xapers",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arxiv Doomscroller",
+    title: "Xapers | Doomscroll Papers",
     description: "Your addictive feed for cutting-edge research",
     creator: "@anant_hq",
     site: "@anant_hq",

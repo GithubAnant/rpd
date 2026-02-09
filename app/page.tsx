@@ -22,7 +22,7 @@ export default async function LandingPage() {
       <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 max-w-150">
         {/* Mobile logo */}
         <div className="lg:hidden mb-8">
-          <ArxivLogo size="xl" className="!w-20 !h-20" />
+          <ArxivLogo size="xl" className="w-20! h-20!" />
         </div>
 
         <h1 className="text-[40px] lg:text-[64px] font-bold text-[#e7e9ea] leading-tight mb-12">

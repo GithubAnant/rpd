@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PaperPageProps): Promise<Meta
         }
 
         return {
-            title: `${paper.title} | Arxiv Doomscroller`,
+            title: `${paper.title} | Xapers`,
             description: paper.abstract.slice(0, 160) + '...',
             openGraph: {
                 title: paper.title,
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PaperPageProps): Promise<Meta
             },
         };
     } catch {
-        return { title: 'Paper | Arxiv Doomscroller' };
+        return { title: 'Paper | Xapers' };
     }
 }
 

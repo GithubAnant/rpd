@@ -1,6 +1,6 @@
 {
-  "name": "Arxiv Doomscroller",
-  "short_name": "Arxiv",
+  "name": "Xapers | Doomscroll Papers",
+  "short_name": "Xapers",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

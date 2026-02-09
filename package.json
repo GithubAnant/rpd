@@ -1,7 +1,8 @@
 {
-  "name": "arxiv-doomscroller",
+  "name": "xapers",
   "version": "0.1.0",
   "private": true,
+  "description": "Xapers - Your addictive feed for cutting-edge research papers.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -38,5 +39,5 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   }
-}
+  }
 
