@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -46,6 +48,7 @@ export function PaperCardVisual({ thumbnail, category, title }: PaperCardVisualP
                     src={thumbnail}
                     alt={title}
                     fill
+                    unoptimized
                     className="object-cover transition-transform duration-500 hover:scale-105"
                     onError={() => setImageError(true)}
                 />

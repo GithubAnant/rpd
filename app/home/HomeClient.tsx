@@ -29,7 +29,7 @@ const TABS = [
 export function HomeClient({ userName, userImage, isGuest, searchQuery }: HomeClientProps) {
     const [activeTab, setActiveTab] = useState<string>("for-you");
     const [refreshKey, setRefreshKey] = useState(0);
-    const { savedIds } = useSavedPapers();
+    const { savedPapers } = useSavedPapers();
     const router = useRouter();
 
     const activeCategory =
@@ -53,14 +53,14 @@ export function HomeClient({ userName, userImage, isGuest, searchQuery }: HomeCl
 
     return (
         <div className="min-h-screen bg-black flex">
-            <Sidebar savedCount={savedIds.size} />
+            <Sidebar savedCount={savedPapers.size} />
 
             {/* Main content */}
             <main className="flex-1 min-w-0 border-r border-[#2f3336] max-w-150">
                 {/* Header */}
                 <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-[#2f3336]">
                     <MobileHeader
-                        savedCount={savedIds.size}
+                        savedCount={savedPapers.size}
                     />
 
                     {/* Desktop title */}
@@ -112,7 +112,7 @@ export function HomeClient({ userName, userImage, isGuest, searchQuery }: HomeCl
             </aside>
 
             <MobileBottomNav
-                savedCount={savedIds.size}
+                savedCount={savedPapers.size}
             />
         </div>
     );

@@ -16,7 +16,7 @@ interface SidebarProps {
  */
 export function Sidebar({ savedCount }: Omit<SidebarProps, "isGuest">) {
     return (
-        <aside className="hidden lg:flex flex-col w-68.75 px-3 border-r border-[#2f3336]">
+        <aside className="hidden lg:flex flex-col w-68.75 px-3 border-r border-[#2f3336] sticky top-0 h-screen">
             {/* Logo */}
             <div className="p-3 mt-1">
                 <Link href="/home" className="inline-block text-[#e7e9ea]">

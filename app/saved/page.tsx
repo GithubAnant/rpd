@@ -8,27 +8,29 @@ import { useSavedPapers } from "@/hooks/useSavedPapers";
 import { PageHeader } from "@/components/ui/page-header";
 
 export default function SavedPage() {
-    const { savedIds, isSaved, toggleSave, isLoaded } = useSavedPapers();
+    const { savedPapers, isSaved, toggleSave } = useSavedPapers();
     const [papers, setPapers] = useState<Paper[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (!isLoaded) return;
-
         const fetchSavedPapers = async () => {
-            if (savedIds.size === 0) {
+            if (savedPapers.size === 0) {
                 setPapers([]);
                 setIsLoading(false);
                 return;
             }
 
-            setIsLoading(true);
             try {
                 const results = await Promise.all(
-                    Array.from(savedIds).map(async (id) => {
-                        const res = await fetch(`/api/paper/${id}`);
+                    Array.from(savedPapers.values()).map(async (savedMeta) => {
+                        const res = await fetch(`/api/paper/${savedMeta.id}`);
                         if (!res.ok) return null;
-                        return res.json() as Promise<Paper>;
+                        const paper = await res.json() as Paper;
+                        // Use stored thumbnail if available
+                        if (savedMeta.thumbnail && !paper.thumbnail) {
+                            paper.thumbnail = savedMeta.thumbnail;
+                        }
+                        return paper;
                     })
                 );
                 setPapers(results.filter((p): p is Paper => p !== null));
@@ -40,11 +42,11 @@ export default function SavedPage() {
         };
 
         fetchSavedPapers();
-    }, [savedIds, isLoaded]);
+    }, [savedPapers]);
 
     return (
         <main className="min-h-screen bg-black">
-            <PageHeader title="Bookmarks" subtitle={`${savedIds.size} Papers`} />
+            <PageHeader title="Bookmarks" subtitle={`${savedPapers.size} Papers`} />
 
             {/* Content */}
             <div className="max-w-150 mx-auto border-x border-[#2f3336] min-h-screen">

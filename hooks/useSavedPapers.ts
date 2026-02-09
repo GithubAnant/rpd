@@ -2,50 +2,55 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-export function useSavedPapers() {
-  const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
-  const [isLoaded, setIsLoaded] = useState(false);
+interface SavedPaperMeta {
+  id: string;
+  thumbnail?: string;
+}
 
-  // Load from localStorage on mount
-  useEffect(() => {
+export function useSavedPapers() {
+  const [savedPapers, setSavedPapers] = useState<Map<string, SavedPaperMeta>>(() => {
     try {
       const stored = localStorage.getItem("savedPapers");
       if (stored) {
-        setSavedIds(new Set(JSON.parse(stored)));
+        const parsed = JSON.parse(stored) as SavedPaperMeta[];
+        return new Map(parsed.map(p => [p.id, p]));
       }
     } catch (e) {
       console.error("Failed to load saved papers:", e);
     }
-    setIsLoaded(true);
-  }, []);
+    return new Map();
+  });
 
-  // Save to localStorage whenever savedIds changes
+  // Save to localStorage whenever savedPapers changes
   useEffect(() => {
-    if (isLoaded) {
-      try {
-        localStorage.setItem("savedPapers", JSON.stringify([...savedIds]));
-      } catch (e) {
-        console.error("Failed to save papers:", e);
-      }
+    try {
+      localStorage.setItem("savedPapers", JSON.stringify(Array.from(savedPapers.values())));
+    } catch (e) {
+      console.error("Failed to save papers:", e);
     }
-  }, [savedIds, isLoaded]);
+  }, [savedPapers]);
 
-  const toggleSave = useCallback((paperId: string) => {
-    setSavedIds((prev) => {
-      const next = new Set(prev);
+  const toggleSave = useCallback((paperId: string, thumbnail?: string) => {
+    setSavedPapers((prev) => {
+      const next = new Map(prev);
       if (next.has(paperId)) {
         next.delete(paperId);
       } else {
-        next.add(paperId);
+        next.set(paperId, { id: paperId, thumbnail });
       }
       return next;
     });
   }, []);
 
   const isSaved = useCallback(
-    (paperId: string) => savedIds.has(paperId),
-    [savedIds],
+    (paperId: string) => savedPapers.has(paperId),
+    [savedPapers],
   );
 
-  return { savedIds, toggleSave, isSaved, isLoaded };
+  const getSavedPaper = useCallback(
+    (paperId: string) => savedPapers.get(paperId),
+    [savedPapers],
+  );
+
+  return { savedPapers, toggleSave, isSaved, getSavedPaper };
 }

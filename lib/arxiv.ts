@@ -71,7 +71,7 @@ function parseArxivEntry(entry: Element): Paper {
     primaryCategory: getPrimaryCategory(),
     pdfUrl: `https://arxiv.org/pdf/${id}.pdf`,
     arxivUrl: `https://arxiv.org/abs/${id}`,
-    thumbnail: `https://huggingface.co/papers/${id}/thumbnail.png`,
+    // Don't include thumbnail for direct arXiv fetches - only HuggingFace has reliable thumbnails
   };
 }
 

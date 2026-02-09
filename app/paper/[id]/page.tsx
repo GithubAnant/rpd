@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { Paper } from '@/types/paper';
 import { fetchPaperById } from '@/lib/arxiv';
 import { PaperPageClient } from './PaperPageClient';
@@ -38,13 +37,18 @@ export async function generateMetadata({ params }: PaperPageProps): Promise<Meta
     }
 }
 
-export default async function PaperPage({ params }: PaperPageProps) {
+export default async function PaperPage({ params, searchParams }: PaperPageProps & { searchParams: Promise<{ thumbnail?: string }> }) {
     const { id } = await params;
+    const { thumbnail } = await searchParams;
 
     let paper: Paper | null = null;
 
     try {
         paper = await fetchPaperById(id);
+        // Use thumbnail from URL if available (from trending/home page)
+        if (paper && thumbnail && !paper.thumbnail) {
+            paper.thumbnail = thumbnail;
+        }
     } catch (error) {
         console.error('Error fetching paper:', error);
     }
