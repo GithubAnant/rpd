@@ -1,4 +1,4 @@
-![Xapers Demo](/readme/image.png)
+![Xapers Demo](/readme/demo.png)
 
 # Xapers
 
