@@ -59,9 +59,7 @@ export function HomeFeed({ userName, userImage, isGuest, searchQuery }: HomeFeed
             <main className="flex-1 min-w-0 border-r border-[#2f3336] max-w-150">
                 {/* Header */}
                 <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-[#2f3336]">
-                    <MobileHeader
-                        savedCount={savedPapers.size}
-                    />
+                    <MobileHeader />
 
                     {/* Desktop title */}
                     <div className="hidden lg:flex items-center px-4 py-3">
