@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Arxiv Doomscroller | Research Papers Feed",
+  title: "Arxiv Doomscroller",
   description:
     "Discover the latest research papers in AI, ML, and Computer Science. Your addictive feed for cutting-edge science.",
   keywords: [
@@ -23,16 +23,34 @@ export const metadata: Metadata = {
     "computer science",
     "academic",
   ],
-  authors: [{ name: "Arxiv Doomscroller" }],
+  authors: [
+    { 
+      name: "Anant Singhal",
+      url: "https://github.com/GithubAnant"
+    }
+  ],
+  creator: "Anant Singhal",
+  publisher: "Anant Singhal",
+  icons: {
+    icon: [
+      { url: "/arxiv-x-logo.png", sizes: "any" },
+    ],
+    apple: [
+      { url: "/arxiv-x-logo.png", sizes: "180x180" },
+    ],
+  },
   openGraph: {
     title: "Arxiv Doomscroller",
-    description: "Your addictive feed for cutting-edge research",
+    description: "Your addictive feed for cutting-edge research. Built by Anant Singhal - dev + builder from New Delhi.",
     type: "website",
+    siteName: "Arxiv Doomscroller",
   },
   twitter: {
     card: "summary_large_image",
     title: "Arxiv Doomscroller",
     description: "Your addictive feed for cutting-edge research",
+    creator: "@anant_hq",
+    site: "@anant_hq",
   },
 };
 

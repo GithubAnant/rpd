@@ -11,7 +11,7 @@ const sizeClasses = {
 };
 
 /**
- * ArXiv X Logo - the distinctive X with one solid and one outlined stroke
+ * Pin Logo - A thumbtack/pin icon representing saved/pinned papers
  */
 export function ArxivLogo({ className = "", size = "md" }: ArxivLogoProps) {
     return (
@@ -20,36 +20,13 @@ export function ArxivLogo({ className = "", size = "md" }: ArxivLogoProps) {
             viewBox="0 0 100 100"
             fill="none"
         >
-            {/* Solid stroke */}
-            <line
-                x1="75"
-                y1="15"
-                x2="25"
-                y2="85"
-                stroke="currentColor"
-                strokeWidth="14"
-                strokeLinecap="round"
+            {/* Pin head (top diamond shape) */}
+            <path
+                d="M50 10L68.75 43.75L50 87.5L31.25 43.75L50 10Z"
+                fill="currentColor"
             />
-            {/* Outlined stroke - outer */}
-            <line
-                x1="25"
-                y1="15"
-                x2="75"
-                y2="85"
-                stroke="currentColor"
-                strokeWidth="14"
-                strokeLinecap="round"
-            />
-            {/* Outlined stroke - inner (creates the outline effect) */}
-            <line
-                x1="25"
-                y1="15"
-                x2="75"
-                y2="85"
-                stroke="black"
-                strokeWidth="8"
-                strokeLinecap="round"
-            />
+            {/* Pin point (circle at bottom) */}
+            <circle cx="50" cy="87.5" r="7" fill="currentColor" />
         </svg>
     );
 }
