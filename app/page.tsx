@@ -30,7 +30,7 @@ export default async function LandingPage() {
         </h1>
 
         <p className="text-[31px] font-bold text-[#e7e9ea] mb-8">
-          Join today.
+          Doomscroll this.
         </p>
 
         {/* Enter button */}
