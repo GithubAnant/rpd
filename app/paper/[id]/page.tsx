@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Paper } from '@/types/paper';
 import { fetchPaperById } from '@/lib/arxiv';
-import { PaperPageClient } from './PaperPageClient';
+import { PaperPageContent } from './paper-content';
 
 interface PaperPageProps {
     params: Promise<{ id: string }>;
@@ -57,5 +57,5 @@ export default async function PaperPage({ params, searchParams }: PaperPageProps
         notFound();
     }
 
-    return <PaperPageClient paper={paper} />;
+    return <PaperPageContent paper={paper} />;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArxivLogo } from "@/components/ui/arxiv-logo";
 import { NavItem } from "@/components/ui/nav-item";
@@ -15,6 +16,12 @@ interface SidebarProps {
  * Desktop sidebar with logo, navigation, and sign out
  */
 export function Sidebar({ savedCount }: Omit<SidebarProps, "isGuest">) {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
         <aside className="hidden lg:flex flex-col w-68.75 px-3 border-r border-[#2f3336] sticky top-0 h-screen">
             {/* Logo */}
@@ -36,7 +43,7 @@ export function Sidebar({ savedCount }: Omit<SidebarProps, "isGuest">) {
                     href="/saved"
                     icon={<BookmarkIcon className="text-[#e7e9ea]" />}
                     label="Bookmarks"
-                    count={savedCount}
+                    count={mounted ? savedCount : 0}
                 />
             </nav>
         </aside>

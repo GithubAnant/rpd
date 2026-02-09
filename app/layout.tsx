@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next"
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { TRPCProvider } from "@/components/providers/trpc-provider";
 import "./globals.css";
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "academic",
   ],
   authors: [
-    { 
+    {
       name: "Anant Singhal",
       url: "https://github.com/GithubAnant"
     }
@@ -39,6 +39,7 @@ export const metadata: Metadata = {
       { url: "/arxiv-x-logo.png", sizes: "180x180" },
     ],
   },
+  manifest: "/manifest.json",
   openGraph: {
     title: "Arxiv Doomscroller",
     description: "Your addictive feed for cutting-edge research. Built by Anant Singhal - dev + builder from New Delhi.",

@@ -10,9 +10,9 @@ import {
   BookmarkIcon,
   DownloadIcon,
 } from "@/components/ui/icons";
-import { PaperCardVisual } from "@/components/paper-card-visual";
+import { PaperCardVisual } from "@/components/paper/paper-card-visual";
 
-interface PaperPageClientProps {
+interface PaperPageContentProps {
   paper: Paper;
 }
 
@@ -27,7 +27,7 @@ function formatDate(dateStr: string): string {
   });
 }
 
-export function PaperPageClient({ paper }: PaperPageClientProps) {
+export function PaperPageContent({ paper }: PaperPageContentProps) {
   const { isSaved, toggleSave } = useSavedPapers();
   const { isLiked, toggleLike } = useLikedPapers();
   const saved = isSaved(paper.id);
@@ -133,9 +133,8 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
             <button
               onClick={() => toggleLike(paper.id)}
               title={liked ? "Unlike" : "Like"}
-              className={`p-3 rounded-full hover-bg transition-colors ${
-                liked ? "text-[#f91880]" : "text-[#71767b] hover:text-[#f91880]"
-              }`}
+              className={`p-3 rounded-full hover-bg transition-colors ${liked ? "text-[#f91880]" : "text-[#71767b] hover:text-[#f91880]"
+                }`}
             >
               <svg className="w-5.5 h-5.5" fill={liked ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -145,9 +144,8 @@ export function PaperPageClient({ paper }: PaperPageClientProps) {
             <button
               onClick={() => toggleSave(paper.id, paper.thumbnail)}
               title={saved ? "Remove bookmark" : "Bookmark"}
-              className={`p-3 rounded-full hover-bg transition-colors ${
-                saved ? "text-[#1d9bf0]" : "text-[#71767b] hover:text-[#1d9bf0]"
-              }`}
+              className={`p-3 rounded-full hover-bg transition-colors ${saved ? "text-[#1d9bf0]" : "text-[#71767b] hover:text-[#1d9bf0]"
+                }`}
             >
               <BookmarkIcon className="w-5.5 h-5.5" fill={saved} />
             </button>

@@ -9,9 +9,9 @@ import { Sidebar, MobileHeader, MobileBottomNav } from "@/components/layout";
 
 // Feature components
 import { FeedTabs, SearchBox, TrendingTopics } from "@/features/feed";
-import { InfiniteScroll } from "@/components/InfiniteScroll";
+import { InfiniteScroll } from "@/components/feed/infinite-scroll";
 
-interface HomeClientProps {
+interface HomeFeedProps {
     userName?: string | null;
     userImage?: string | null;
     isGuest: boolean;
@@ -26,7 +26,7 @@ const TABS = [
     { id: "robotics", label: "Robotics", category: "cs.RO" },
 ] as const;
 
-export function HomeClient({ userName, userImage, isGuest, searchQuery }: HomeClientProps) {
+export function HomeFeed({ userName, userImage, isGuest, searchQuery }: HomeFeedProps) {
     const [activeTab, setActiveTab] = useState<string>("for-you");
     const [refreshKey, setRefreshKey] = useState(0);
     const { savedPapers } = useSavedPapers();

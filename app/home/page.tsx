@@ -1,5 +1,5 @@
 
-import { HomeClient } from './HomeClient';
+import { HomeFeed } from './home-feed';
 
 interface PageProps {
     searchParams: Promise<{ search?: string }>;
@@ -10,7 +10,7 @@ export default async function HomePage({ searchParams }: PageProps) {
     const searchQuery = params.search;
 
     return (
-        <HomeClient
+        <HomeFeed
             userName={undefined}
             userImage={undefined}
             isGuest={true}

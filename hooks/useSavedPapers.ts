@@ -8,23 +8,31 @@ interface SavedPaperMeta {
 }
 
 export function useSavedPapers() {
-  const [savedPapers, setSavedPapers] = useState<Map<string, SavedPaperMeta>>(() => {
+  // Initialize empty on server, load from local storage on client
+  const [savedPapers, setSavedPapers] = useState<Map<string, SavedPaperMeta>>(
+    new Map(),
+  );
+
+  // Load from localStorage on mount
+  useEffect(() => {
     try {
       const stored = localStorage.getItem("savedPapers");
       if (stored) {
         const parsed = JSON.parse(stored) as SavedPaperMeta[];
-        return new Map(parsed.map(p => [p.id, p]));
+        setSavedPapers(new Map(parsed.map((p) => [p.id, p])));
       }
     } catch (e) {
       console.error("Failed to load saved papers:", e);
     }
-    return new Map();
-  });
+  }, []);
 
   // Save to localStorage whenever savedPapers changes
   useEffect(() => {
     try {
-      localStorage.setItem("savedPapers", JSON.stringify(Array.from(savedPapers.values())));
+      localStorage.setItem(
+        "savedPapers",
+        JSON.stringify(Array.from(savedPapers.values())),
+      );
     } catch (e) {
       console.error("Failed to save papers:", e);
     }

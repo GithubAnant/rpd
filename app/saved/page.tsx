@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Paper } from "@/types/paper";
-import { PaperCard } from "@/components/PaperCard";
-import { SkeletonCard } from "@/components/SkeletonCard";
+import { PaperCard } from "@/components/paper/paper-card";
+import { SkeletonCard } from "@/components/ui/skeleton-card";
 import { useSavedPapers } from "@/hooks/useSavedPapers";
 import { PageHeader } from "@/components/ui/page-header";
 

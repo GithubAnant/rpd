@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { Paper, PapersResponse } from '@/types/paper';
-import { PaperCard } from './PaperCard';
-import { SkeletonCard } from './SkeletonCard';
+import { PaperCard } from '@/components/paper/paper-card';
+import { SkeletonCard } from '@/components/ui/skeleton-card';
 import { useSavedPapers } from '@/hooks/useSavedPapers';
 
 interface InfiniteScrollProps {
