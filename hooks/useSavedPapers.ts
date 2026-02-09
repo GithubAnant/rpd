@@ -13,6 +13,8 @@ export function useSavedPapers() {
     new Map(),
   );
 
+  const [isInitialized, setIsInitialized] = useState(false);
+
   // Load from localStorage on mount
   useEffect(() => {
     try {
@@ -23,11 +25,15 @@ export function useSavedPapers() {
       }
     } catch (e) {
       console.error("Failed to load saved papers:", e);
+    } finally {
+      setIsInitialized(true);
     }
   }, []);
 
   // Save to localStorage whenever savedPapers changes
   useEffect(() => {
+    if (!isInitialized) return;
+
     try {
       localStorage.setItem(
         "savedPapers",
@@ -36,7 +42,7 @@ export function useSavedPapers() {
     } catch (e) {
       console.error("Failed to save papers:", e);
     }
-  }, [savedPapers]);
+  }, [savedPapers, isInitialized]);
 
   const toggleSave = useCallback((paperId: string, thumbnail?: string) => {
     setSavedPapers((prev) => {

@@ -16,14 +16,16 @@ export function NavItem({ href, icon, label, active, count }: NavItemProps) {
     return (
         <Link
             href={href}
-            className="flex items-center gap-5 px-3 py-3 rounded-full hover-bg transition-colors"
+            className="flex items-center gap-5 px-3 py-3 rounded-full hover:bg-white/10 transition-colors w-full"
         >
             {icon}
             <span className={`text-xl ${active ? "font-bold" : "font-medium"} text-[#e7e9ea]`}>
                 {label}
             </span>
             {count !== undefined && count > 0 && (
-                <span className="text-sm text-[#71767b]">{count}</span>
+                <span className="ml-auto text-[#e7e9ea] font-medium text-sm">
+                    {count}
+                </span>
             )}
         </Link>
     );
