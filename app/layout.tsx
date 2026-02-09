@@ -15,8 +15,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Xapers | Doomscroll Papers",
   description:
-    "Discover the latest research papers in AI, ML, and Computer Science. Your addictive feed for cutting-edge science.",
+    "Doomscroll research papers like you doomscroll Twitter. AI, ML, Computer Science - get your daily dose of cutting-edge science.",
   keywords: [
+    "doomscroller",
+    "research paper",
     "arxiv",
     "research papers",
     "AI",
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   openGraph: {
     title: "Xapers | Doomscroll Papers",
-    description: "Your addictive feed for cutting-edge research. Built by Anant Singhal - dev + builder from New Delhi.",
+    description: "Doomscroll research papers like you doomscroll Twitter. AI, ML, Computer Science - get your daily dose of research papers here.",
     type: "website",
     siteName: "Xapers",
     images: [
@@ -60,7 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Xapers | Doomscroll Papers",
-    description: "Your addictive feed for cutting-edge research",
+    description: "Doomscroll research papers like you doomscroll Twitter. Your feed for cutting-edge AI & ML research.",
     creator: "@anant_hq",
     site: "@anant_hq",
     images: ["/og-image.png"],
