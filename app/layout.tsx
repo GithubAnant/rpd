@@ -48,6 +48,14 @@ export const metadata: Metadata = {
     description: "Your addictive feed for cutting-edge research. Built by Anant Singhal - dev + builder from New Delhi.",
     type: "website",
     siteName: "Arxiv Doomscroller",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Arxiv Doomscroller",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -55,6 +63,7 @@ export const metadata: Metadata = {
     description: "Your addictive feed for cutting-edge research",
     creator: "@anant_hq",
     site: "@anant_hq",
+    images: ["/og-image.png"],
   },
 };
 

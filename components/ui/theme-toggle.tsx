@@ -43,7 +43,7 @@ type ThemeId = typeof THEMES[number]['id'];
 
 export function ThemeToggle() {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     // Initialize theme from localStorage
     const [currentTheme, setCurrentTheme] = useState<ThemeId>(() => {
         if (typeof window === 'undefined') return 'twitter-blue';
@@ -77,7 +77,7 @@ export function ThemeToggle() {
     }, [applyTheme]);
 
     return (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-20 lg:bottom-6 right-6 z-50">
             {/* Theme picker popup */}
             {isOpen && (
                 <div className="absolute bottom-14 right-0 bg-(--color-bg-secondary) border border-(--color-border) rounded-2xl p-4 shadow-2xl w-72 max-h-[70vh] overflow-y-auto">
