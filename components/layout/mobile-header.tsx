@@ -27,7 +27,7 @@ export function MobileHeader({
     return (
         <div className="flex items-center justify-between px-4 py-3 lg:hidden">
             {/* Logo */}
-            <ArxivLogo size="md" className="text-[#e7e9ea]" />
+            <ArxivLogo size="lg" className="text-[#e7e9ea]" />
 
             <Link href="/saved" className="relative p-2">
                 <BookmarkIcon className="w-5 h-5 text-[#e7e9ea]" />

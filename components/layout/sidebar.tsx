@@ -27,7 +27,7 @@ export function Sidebar({ savedCount }: Omit<SidebarProps, "isGuest">) {
             {/* Logo */}
             <div className="p-3 mt-1">
                 <Link href="/home" className="inline-block text-[#e7e9ea]">
-                    <ArxivLogo size="md" />
+                    <ArxivLogo size="lg" />
                 </Link>
             </div>
 

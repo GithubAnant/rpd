@@ -2,26 +2,29 @@ import Image from "next/image";
 
 interface ArxivLogoProps {
     className?: string;
-    size?: "sm" | "md" | "lg" | "xl";
+    size?: "sm" | "md" | "lg" | "xl" | "2xl";
 }
-
-const sizeClasses = {
-    sm: "w-6 h-6",
-    md: "w-8 h-8",
-    lg: "w-12 h-12",
-    xl: "w-80 h-80",
-};
 
 /**
  * Arxiv X Logo - The app's main logo
  */
 export function ArxivLogo({ className = "", size = "md" }: ArxivLogoProps) {
+    let dim = 32;
+    switch (size) {
+        case "sm": dim = 24; break;
+        case "md": dim = 32; break;
+        case "lg": dim = 48; break;
+        case "xl": dim = 320; break;
+        case "2xl": dim = 500; break;
+        default: dim = 32;
+    }
+
     return (
         <Image
-            src="/arxiv-x-logo.png"
+            src="/icon-512.png"
             alt="Arxiv Logo"
-            width={size === "sm" ? 24 : size === "md" ? 32 : size === "lg" ? 48 : 320}
-            height={size === "sm" ? 24 : size === "md" ? 32 : size === "lg" ? 48 : 320}
+            width={dim}
+            height={dim}
             className={className}
         />
     );

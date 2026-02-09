@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { TRPCProvider } from "@/components/providers/trpc-provider";
+import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import "./globals.css";
 
 const inter = Inter({
@@ -39,7 +40,6 @@ export const metadata: Metadata = {
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180" },
-      { url: "/arxiv-x-logo.png", sizes: "180x180" },
     ],
   },
   manifest: "/manifest.json",
@@ -79,6 +79,7 @@ export default function RootLayout({
         <TRPCProvider>
           {children}
           <ThemeToggle />
+          <ServiceWorkerRegister />
         </TRPCProvider>
         <Analytics />
       </body>
