@@ -1,63 +1,61 @@
-# RPD - Research Paper Doomscroller
+![Xapers Demo](/readme/image.png)
 
-An addictive, X/Twitter-style feed for browsing arXiv research papers. Discover AI, ML, NLP, and Computer Vision papers with a familiar infinite scroll experience.
+# Xapers
+
+**Xapers** (formerly Arxiv Doomscroller) is an addictive, X/Twitter-style feed for browsing arXiv research papers. Discover the latest in AI, ML, NLP, and Computer Vision with a familiar infinite scroll experience.
+
+## Inspiration
+
+This project was heavily inspired by **[Xikipedia](https://xikipedia.org)** by **[Rebane](https://x.com/rebane2001)** (@rebane2001).
+The idea of a "doomscroller" interface for academic content was too good not to build for arXiv papers!
 
 ## Features
 
 - **X/Twitter-style UI** - Flat design, dark theme, familiar navigation
-- **Infinite scroll feed** - Smooth, endless paper browsing
-- **Category tabs** - For You, ML, NLP, Vision, Robotics
+- **Infinite Scroll Feed** - Smooth, endless paper browsing
+- **Visuals** - Generated sci-fi abstract covers for paper categories
+- **PWA Support** - Installable on mobile and desktop
+- **Categories** - Custom feeds for AI, ML, NLP, Vision, Robotics, Physics, and Math
 - **Bookmarks** - Save papers for later reading
-- **Individual paper pages** - Deep links for sharing (`/paper/[id]`)
-- **Google auth + guest mode** - Optional sign-in
-- **Mobile-first** - Optimized for mobile Chrome
 
 ## Tech Stack
 
-- **Next.js 16** with App Router
+- **Next.js 16** (App Router)
 - **TypeScript**
 - **Tailwind CSS**
-- **NextAuth.js** for authentication
-- **arXiv API** for paper data
+- **NextAuth.js** (Google Auth)
+- **arXiv API**
 - **Vercel Analytics**
-
-## Routes
-
-| Route         | Description            |
-| ------------- | ---------------------- |
-| `/`           | Landing page with auth |
-| `/home`       | Main paper feed        |
-| `/paper/[id]` | Individual paper view  |
-| `/saved`      | Bookmarked papers      |
 
 ## Getting Started
 
-```bash
-# Install dependencies
-npm install
+1.  **Clone the repo**
 
-# Set up environment variables
-cp .env.example .env.local
-# Add your Google OAuth credentials and NEXTAUTH_SECRET
+    ```bash
+    git clone https://github.com/GithubAnant/xapers.git
+    cd xapers
+    ```
 
-# Run development server
-npm run dev
-```
+2.  **Install dependencies**
 
-Open [http://localhost:3000](http://localhost:3000)
+    ```bash
+    npm install
+    ```
 
-## Environment Variables
+3.  **Environment Setup**
+    Copy `.env.example` to `.env.local` and add your credentials:
 
-```
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your-secret-key
-GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-```
+    ```bash
+    cp .env.example .env.local
+    ```
 
-## Deploy
+4.  **Run Development Server**
 
-Deploy on [Vercel](https://vercel.com) with one click. Analytics are automatically enabled.
+    ```bash
+    npm run dev
+    ```
+
+5.  **Open** [http://localhost:3000](http://localhost:3000)
 
 ## License
 
