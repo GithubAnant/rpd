@@ -22,7 +22,7 @@ export function FeedTabs({ tabs, activeTab, onTabChange }: FeedTabsProps) {
                 <button
                     key={tab.id}
                     onClick={() => onTabChange(tab.id)}
-                    className={`flex-1 px-4 py-4 text-[15px] font-medium transition-colors relative hover-bg ${activeTab === tab.id ? "text-[#e7e9ea]" : "text-[#71767b]"
+                    className={`flex-1 px-4 py-4 text-[15px] font-medium transition-colors relative hover-bg whitespace-nowrap ${activeTab === tab.id ? "text-[#e7e9ea]" : "text-[#71767b]"
                         }`}
                 >
                     {tab.label}
